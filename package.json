@@ -1,0 +1,34 @@
+{
+  "name": "midifile-performer",
+  "version": "1.0.0",
+  "description": "JS version of Bernard P. Serpette's MidifilePerformer core functionalities",
+  "main": "dist/node/MidifilePerformer.js",
+  "browser": "dist/browser/MidifilePerformer.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "build": "make clean && make",
+    "test": "node ./test/tape/*.js | tap-spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/scrime-u-bordeaux/midifile-performer-js.git"
+  },
+  "keywords": [
+    "midi",
+    "file",
+    "interpretation",
+    "performance"
+  ],
+  "author": "",
+  "license": "BSD-3-Clause",
+  "bugs": {
+    "url": "https://github.com/scrime-u-bordeaux/midifile-performer-js/issues"
+  },
+  "homepage": "https://github.com/scrime-u-bordeaux/midifile-performer-js#readme",
+  "devDependencies": {
+    "tap-spec": "^5.0.0",
+    "tape": "^5.5.3"
+  }
+}
