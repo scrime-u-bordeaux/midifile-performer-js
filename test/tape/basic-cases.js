@@ -125,7 +125,7 @@ function writeScoreToRenderer(renderer, notes) {
 
 function getRendererEventSets(renderer) {
     const out = [];
-    while (renderer.hasEvents()) {
+    while (renderer.hasEvents(true)) {
         const eventsSet = makeArray(renderer.pullEvents());
         out.push(eventsSet);
     }
@@ -136,7 +136,7 @@ function getRendererOutput(renderer, commands) {
     const out = [];
     commands.forEach(c => {
         const [ pressed, id ] = c;
-        const eventSet = makeArray(renderer.combine3(command(pressed, id)));
+        const eventSet = makeArray(renderer.combine3(command(pressed, id), true));
         out.push(eventSet);
     })
     return out;
@@ -151,8 +151,8 @@ MidifilePerformer.onRuntimeInitialized = function() {
     test('overlap', function(t) {
         t.plan(1);
         writeScoreToRenderer(renderer, normalScore);
-        // const output = getRendererOutput(renderer, longCommandSeries);
-        const output = getRendererEventSets(renderer);
+        const output = getRendererOutput(renderer, longCommandSeries);
+        // const output = getRendererEventSets(renderer);
         console.log(output);
         t.equal(true, true);
     });
