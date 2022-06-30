@@ -1,22 +1,16 @@
 # midifile-performer-js
 
-#### Building
+#### Build requirements
 
-`npm run build`
+requirements :
 
-Requirements :
+* cmake
+* emscripten (clone [emsdk](https://github.com/emscripten-core/emsdk) and follow installation procedure)
 
-  * cmake
-  * emscripten (clone [emsdk](https://github.com/emscripten-core/emsdk) and follow installation procedure)
+commands :
 
-
-#### Testing
-
-`npm run test`
-
-Requirements :
-
-  * nodejs
+* `npm run build`
+* `npm run test`
 
 #### Notes
 
