@@ -1,5 +1,5 @@
 #include <emscripten/bind.h>
-#include "libMidifilePerformer/src/impl/MidiRenderer.h"
+#include "libMidifilePerformer/src/impl/MFPRenderer.h"
 
 using namespace emscripten;
 
@@ -29,14 +29,16 @@ EMSCRIPTEN_BINDINGS(MidifilePerformer) {
     .function("clear",        &Chronology<noteData>::clear)
     ;
 
-  class_<MidiRenderer>("Renderer")
+  typedef MFPRenderer Renderer;
+
+  class_<Renderer>("Renderer")
     .constructor()
-    .function("pushEvent",    &MidiRenderer::pushEvent)
-    .function("finalize",     &MidiRenderer::finalize)
-    .function("hasEvents",    &MidiRenderer::hasEvents)
-    .function("pullEvents",   &MidiRenderer::pullEvents)
-    .function("pullEventsSet",&MidiRenderer::pullEventsSet)
-    .function("combine3",     &MidiRenderer::combine3)
-    .function("clear",        &MidiRenderer::clear)
+    .function("pushEvent",    &Renderer::pushEvent)
+    .function("finalize",     &Renderer::finalize)
+    .function("hasEvents",    &Renderer::hasEvents)
+    .function("pullEvents",   &Renderer::pullEvents)
+    .function("pullEventsSet",&Renderer::pullEventsSet)
+    .function("combine3",     &Renderer::combine3)
+    .function("clear",        &Renderer::clear)
     ;
 }
