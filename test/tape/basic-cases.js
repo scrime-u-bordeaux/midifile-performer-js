@@ -115,7 +115,7 @@ function makeArray(array) {
 }
 
 function writeScoreToRenderer(renderer, notes) {
-    //renderer.clear();
+    renderer.clear();
     notes.forEach(n => {
         const [ dt, on, pitch ] = n;
         renderer.pushEvent(dt, note(on, pitch));
