@@ -1,15 +1,20 @@
 {
   "name": "midifile-performer",
-  "version": "1.0.0",
-  "description": "JS version of Bernard P. Serpette's MidifilePerformer core functionalities",
+  "version": "0.0.0",
+  "description": "a library allowing for real-time expressive performance of MIDI files",
   "main": "dist/node/MidifilePerformer.js",
   "browser": "dist/browser/MidifilePerformer.js",
   "directories": {
     "test": "test"
   },
+  "np": {
+    "yarn": false,
+    "contents": "dist"
+  },
   "scripts": {
     "build": "make clean && make",
-    "test": "node ./test/tape/*.js | tap-spec"
+    "test": "node ./test/*.js | tap-spec",
+    "release": "make dist && np"
   },
   "repository": {
     "type": "git",
