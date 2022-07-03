@@ -7,9 +7,12 @@
   "directories": {
     "test": "test"
   },
+  "files": [
+    "dist/**"
+  ],
   "np": {
     "yarn": false,
-    "contents": "dist"
+    "contents": "dist/"
   },
   "scripts": {
     "build": "make clean && make",
