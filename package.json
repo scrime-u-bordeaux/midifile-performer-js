@@ -1,7 +1,7 @@
 {
   "name": "midifile-performer",
   "version": "0.1.0",
-  "description": "a library allowing for real-time expressive performance of MIDI files",
+  "description": "A library allowing for real-time expressive performance of MIDI files",
   "main": "dist/node/MidifilePerformer.js",
   "browser": "dist/browser/MidifilePerformer.js",
   "directories": {
