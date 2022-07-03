@@ -1,5 +1,5 @@
 const test = require('tape');
-const MidifilePerformer = require('../../dist/node/MidifilePerformer.js');
+const MidifilePerformer = require('../dist/node/MidifilePerformer.js');
 
 /* * * * * * * * * * * * * * * * * UTILITIES * * * * * * * * * * * * * * * * */
 
