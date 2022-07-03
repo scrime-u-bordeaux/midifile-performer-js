@@ -7,9 +7,6 @@
   "directories": {
     "test": "test"
   },
-  "files": [
-    "dist/**"
-  ],
   "np": {
     "yarn": false,
     "contents": "dist/"
