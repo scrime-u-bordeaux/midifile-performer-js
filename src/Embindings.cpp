@@ -20,6 +20,15 @@ EMSCRIPTEN_BINDINGS(MidifilePerformer) {
 
   register_vector<noteData>("noteDataSet");
 
+  typedef ChronologyParams::parameters ChronologyParameters;
+
+  value_object<ChronologyParameters>("chronologyParameters")
+    .field("unmeet",              &ChronologyParameters::unmeet)
+    .field("complete",            &ChronologyParameters::complete)
+    .field("detach",              &ChronologyParameters::detach)
+    .field("temporalResolution",  &ChronologyParameters::temporalResolution)
+    ;
+
   class_<Chronology<noteData>>("Chronology")
     .constructor()
     .function("pushEvent",    &Chronology<noteData>::pushEvent)
@@ -27,18 +36,31 @@ EMSCRIPTEN_BINDINGS(MidifilePerformer) {
     .function("hasEvents",    &Chronology<noteData>::hasEvents)
     .function("pullEvents",   &Chronology<noteData>::pullEvents)
     .function("clear",        &Chronology<noteData>::clear)
+    .function("size",         &Chronology<noteData>::size)
+    ;
+
+  typedef ChordVelocityMapping::StrategyType ChordStrategy;
+
+  enum_<ChordStrategy>("chordStrategy")
+    .value("sameForAll",              ChordStrategy::SameForAll)
+    .value("clippedScaledFromMean",   ChordStrategy::ClippedScaledFromMean)
+    .value("adjustedScaledFromMean",  ChordStrategy::AdjustedScaledFromMean)
+    .value("clippedScaledFromMax",    ChordStrategy::ClippedScaledFromMax)
     ;
 
   typedef MFPRenderer Renderer;
 
   class_<Renderer>("Renderer")
     .constructor()
-    .function("pushEvent",    &Renderer::pushEvent)
-    .function("finalize",     &Renderer::finalize)
-    .function("hasEvents",    &Renderer::hasEvents)
-    .function("pullEvents",   &Renderer::pullEvents)
-    .function("pullEventsSet",&Renderer::pullEventsSet)
-    .function("combine3",     &Renderer::combine3)
-    .function("clear",        &Renderer::clear)
+    .function("setChordRenderingStrategy",&Renderer::setChordRenderingStrategy)
+    .function("pushEvent",                &Renderer::pushEvent)
+    .function("finalize",                 &Renderer::finalize)
+    .function("hasEvents",                &Renderer::hasEvents)
+    .function("pullEvents",               &Renderer::pullEvents)
+    .function("pullEventsSet",            &Renderer::pullEventsSet)
+    .function("combine3",                 &Renderer::combine3)
+    .function("clear",                    &Renderer::clear)
+    .function("setPartition",             &Renderer::setPartition)
+    .function("getPartition",             &Renderer::getPartition)
     ;
 }
