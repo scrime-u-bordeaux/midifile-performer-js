@@ -14,7 +14,8 @@
   "scripts": {
     "build": "make clean && make",
     "test": "node ./test/*.js | tap-spec",
-    "release": "make dist && np"
+    "dist": "npm run build && make dist",
+    "release": "npm run dist && np"
   },
   "repository": {
     "type": "git",
