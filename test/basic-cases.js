@@ -3,15 +3,20 @@ const MidifilePerformer = require('../dist/node/MidifilePerformer.js');
 
 /* * * * * * * * * * * * * * * * * UTILITIES * * * * * * * * * * * * * * * * */
 
-const velocity = 127;
-const channel = 1;
+const DEF_ON_VELOCITY = 127
+const DEF_OFF_VELOCITY = 0;
+const DEF_CHANNEL = 1;
 
-function note(on, pitch) {
-  return { on, pitch, velocity, channel };
+function note(on, pitch, velocity = null, channel = DEF_CHANNEL) {
+    if (velocity === null) {
+        velocity = on ? DEF_ON_VELOCITY : DEF_OFF_VELOCITY;
+    }
+
+    return { on, pitch, velocity, channel };
 }
 
-function command(pressed, id) {
-  return { pressed, id, velocity, channel };
+function command(pressed, id, velocity = DEF_ON_VELOCITY, channel = DEF_CHANNEL) {
+    return { pressed, id, velocity, channel };
 }
 
 ////////// scores
@@ -117,8 +122,12 @@ function makeArray(array) {
 function writeScoreToRenderer(renderer, notes) {
     renderer.clear();
     notes.forEach(n => {
-        const [ dt, on, pitch ] = n;
-        renderer.pushEvent(dt, note(on, pitch));
+        const [
+            dt, on, pitch,
+            velocity = on ? DEF_ON_VELOCITY : DEF_OFF_VELOCITY,
+            channel = DEF_CHANNEL
+        ] = n;
+        renderer.pushEvent(dt, note(on, pitch, velocity, channel));
     });
     renderer.finalize();
 }
@@ -135,8 +144,14 @@ function getRendererEventSets(renderer) {
 function getRendererOutput(renderer, commands) {
     const out = [];
     commands.forEach(c => {
-        const [ pressed, id ] = c;
-        const eventSet = makeArray(renderer.combine3(command(pressed, id), true));
+        const [
+            pressed, id,
+            velocity = pressed ? DEF_ON_VELOCITY : DEF_OFF_VELOCITY,
+            channel = DEF_CHANNEL
+        ] = c;
+        const eventSet = makeArray(
+            renderer.combine3(command(pressed, id, velocity, channel), true)
+        );
         out.push(eventSet);
     })
     return out;
@@ -148,12 +163,54 @@ function getRendererOutput(renderer, commands) {
 MidifilePerformer.onRuntimeInitialized = function() {
     const renderer = new MidifilePerformer.Renderer();
 
+    test('chord velocities', function(t) {
+        t.plan(1);
+        const score = [
+            [ 0, true, 60, 127 ],
+            [ 0, true, 64, 100 ],
+            [ 0, true, 67, 4 ],
+            [ 5, false, 60 ],
+            [ 0, false, 64 ],
+            [ 0, false, 67 ],
+        ];
+        function makeChordCommand(velocity) {
+            return [
+                [ true, 60, velocity ],
+                [ false, 60],
+            ];
+        }
+
+        renderer.setChordRenderingStrategy(
+            //MidifilePerformer.chordStrategy.sameForAll
+            //MidifilePerformer.chordStrategy.clippedScaledFromMean
+            //MidifilePerformer.chordStrategy.adjustedScaledFromMean
+            MidifilePerformer.chordStrategy.clippedScaledFromMax
+        );
+
+        let output;
+        writeScoreToRenderer(renderer, score);
+        const model = renderer.getPartition();
+        
+        output = getRendererOutput(renderer, makeChordCommand(127));
+        console.log(output);
+
+        renderer.setPartition(model);
+        output = getRendererOutput(renderer, makeChordCommand(64));
+        console.log(output);
+
+        renderer.setPartition(model);
+        output = getRendererOutput(renderer, makeChordCommand(1));
+        console.log(output);
+
+        t.equal(true, true);
+    });
+
     test('overlap', function(t) {
         t.plan(1);
-        writeScoreToRenderer(renderer, normalScore);
-        const output = getRendererOutput(renderer, longCommandSeries);
+        // writeScoreToRenderer(renderer, normalScore);
+        // const output = getRendererOutput(renderer, longCommandSeries);
         // const output = getRendererEventSets(renderer);
-        console.log(output);
+        // console.log(output);
         t.equal(true, true);
     });
 
