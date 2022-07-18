@@ -6,9 +6,10 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 if(EMSCRIPTEN)
   add_executable(${PROJECT_NAME}
-    ${PROJECT_SOURCE_DIR}/src/Embindings.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/Embindings.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/libMidifilePerformer/src/impl/ChordVelocityMapping.cpp
   )
-  
+
   # see all options here :
   # https://github.com/emscripten-core/emscripten/blob/main/src/settings.js
 
