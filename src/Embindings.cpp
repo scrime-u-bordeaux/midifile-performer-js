@@ -1,5 +1,5 @@
 #include <emscripten/bind.h>
-#include "libMidifilePerformer/src/impl/MFPRenderer.h"
+#include "libMidifilePerformer/src/include/impl/MFPRenderer.h"
 
 using namespace emscripten;
 
@@ -25,7 +25,7 @@ EMSCRIPTEN_BINDINGS(MidifilePerformer) {
   value_object<ChronologyParameters>("chronologyParameters")
     .field("unmeet",              &ChronologyParameters::unmeet)
     .field("complete",            &ChronologyParameters::complete)
-    .field("detach",              &ChronologyParameters::detach)
+    .field("shift",               &ChronologyParameters::shift)
     .field("temporalResolution",  &ChronologyParameters::temporalResolution)
     ;
 
@@ -49,9 +49,11 @@ EMSCRIPTEN_BINDINGS(MidifilePerformer) {
     ;
 
   typedef MFPRenderer Renderer;
+  // typedef MFPRenderer<noteData, commandData, commandKey> Renderer;
+  // typedef Renderer<noteData, commandData, commandKey> Renderer;
 
   class_<Renderer>("Renderer")
-    .constructor()
+    .constructor<ChronologyParameters>()
     .function("setChordRenderingStrategy",&Renderer::setChordRenderingStrategy)
     .function("pushEvent",                &Renderer::pushEvent)
     .function("finalize",                 &Renderer::finalize)
@@ -59,6 +61,8 @@ EMSCRIPTEN_BINDINGS(MidifilePerformer) {
     .function("pullEvents",               &Renderer::pullEvents)
     .function("pullEventsSet",            &Renderer::pullEventsSet)
     .function("combine3",                 &Renderer::combine3)
+    // .function("combine3",
+    //   select_overload<std::vector<noteData>(commandData, bool)>(&Renderer::combine3))
     .function("clear",                    &Renderer::clear)
     .function("setPartition",             &Renderer::setPartition)
     .function("getPartition",             &Renderer::getPartition)
