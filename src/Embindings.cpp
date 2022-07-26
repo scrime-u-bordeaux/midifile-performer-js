@@ -20,12 +20,20 @@ EMSCRIPTEN_BINDINGS(MidifilePerformer) {
 
   register_vector<noteData>("noteDataSet");
 
+  typedef Events::correspondOption ShiftMode;
+
+  enum_<ShiftMode>("shiftMode")
+    .value("pitchAndChannel", ShiftMode::PITCH_AND_CHANNEL)
+    .value("pitchOnly",       ShiftMode::PITCH_ONLY)
+    .value("none",            ShiftMode::NONE)
+    ;
+
   typedef ChronologyParams::parameters ChronologyParameters;
 
   value_object<ChronologyParameters>("chronologyParameters")
     .field("unmeet",              &ChronologyParameters::unmeet)
     .field("complete",            &ChronologyParameters::complete)
-    .field("shift",               &ChronologyParameters::shift)
+    .field("shiftMode",           &ChronologyParameters::shiftMode)
     .field("temporalResolution",  &ChronologyParameters::temporalResolution)
     ;
 

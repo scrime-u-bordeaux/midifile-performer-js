@@ -161,7 +161,12 @@ function getRendererOutput(renderer, commands) {
 /* * * * * * * * * * * * * * * * * * TESTS * * * * * * * * * * * * * * * * * */
 
 MidifilePerformer.onRuntimeInitialized = function() {
-    const renderer = new MidifilePerformer.Renderer();
+    const renderer = new MidifilePerformer.Renderer({
+        unmeet:             true,
+        complete:           false,
+        shiftMode:          MidifilePerformer.shiftMode.pitchAndChannel,
+        temporalResolution: 0,
+    });
 
     test('chord velocities', function(t) {
         t.plan(1);
