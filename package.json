@@ -13,8 +13,8 @@
   },
   "scripts": {
     "build": "make clean && make",
-    "test": "node ./test/*.js | tap-spec",
     "dist": "npm run build && make dist",
+    "test": "node ./test/*.js | tap-spec",
     "release": "npm run dist && np"
   },
   "repository": {
