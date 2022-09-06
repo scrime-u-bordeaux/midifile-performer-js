@@ -185,7 +185,7 @@ MidifilePerformer.onRuntimeInitialized = function() {
       ];
     }
 
-    renderer.setChordRenderingStrategy(
+    renderer.setChordVelocityMappingStrategy(
       //MidifilePerformer.chordStrategy.sameForAll
       //MidifilePerformer.chordStrategy.clippedScaledFromMean
       //MidifilePerformer.chordStrategy.adjustedScaledFromMean
