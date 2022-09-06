@@ -9,8 +9,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 if(EMSCRIPTEN)
   add_executable(${PROJECT_NAME}
     ${CMAKE_CURRENT_LIST_DIR}/src/Embindings.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/libMidifilePerformer/src/cpp/impl/ChordRendering.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/libMidifilePerformer/src/cpp/impl/VoiceStealing.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/libMidifilePerformer/src/cpp/impl/ChordVelocityMapping.cpp
   )
 
   # see all options here :
