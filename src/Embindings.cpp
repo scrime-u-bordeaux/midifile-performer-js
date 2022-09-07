@@ -179,8 +179,11 @@ EMSCRIPTEN_BINDINGS(MidifilePerformer) {
     .function("stopped",              &Performer::stopped)
     .function("setCurrentIndex",      &Performer::setCurrentIndex)
     .function("getCurrentIndex",      &Performer::getCurrentIndex)
+    .function("getCurrentSetPair",    &Performer::getCurrentSetPair)
+    .function("getNextIndex",         &Performer::getNextIndex)
     .function("peekNextSetPair",      &Performer::peekNextSetPair)
-    .function("render",               &Performer::render)
+    .function("render",
+      select_overload<std::vector<noteData>(commandData)>(&Performer::render))
     .function("getAllNoteOffs",       &Performer::getAllNoteOffs)
     .function("setChronology",        &Performer::setChronology)
     .function("getChronology",        &Performer::getChronology)
