@@ -4,6 +4,9 @@
   "description": "A library allowing for real-time expressive performance of MIDI files",
   "main": "dist/node/MidifilePerformer.js",
   "browser": "dist/browser/MidifilePerformer.js",
+  "engines": {
+    "node": ">=18.15.0"
+  },
   "directories": {
     "test": "test"
   },
@@ -34,8 +37,8 @@
   },
   "homepage": "https://github.com/scrime-u-bordeaux/midifile-performer-js#readme",
   "devDependencies": {
-    "np": "^7.6.2",
-    "tap-spec": "^5.0.0",
+    "np": "^8.0.4",
+    "tap-spec": "^2.2.2",
     "tape": "^5.5.3"
   }
 }
