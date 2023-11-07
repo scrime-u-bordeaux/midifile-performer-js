@@ -17,6 +17,10 @@ if(EMSCRIPTEN)
 
   set(LINK_FLAGS "-lembind")
 
+  if(NODE_VERSION)
+    # nothing special to do here for now
+  endif()
+
   if(BROWSER_VERSION)
     set(LINK_FLAGS "${LINK_FLAGS} -sENVIRONMENT=web -sMODULARIZE=1 -sEXPORT_ES6=1")
   endif()

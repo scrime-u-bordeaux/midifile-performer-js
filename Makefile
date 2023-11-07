@@ -4,7 +4,7 @@ build:
 	emcmake cmake -B build/browser -DBROWSER_VERSION=ON; \
   cmake --build build/browser; \
 	
-	emcmake cmake -B build/node; \
+	emcmake cmake -B build/node -DNODE_VERSION=ON; \
   cmake --build build/node; \
 
 dist:
