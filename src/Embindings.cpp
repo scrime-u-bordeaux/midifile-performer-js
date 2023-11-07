@@ -93,6 +93,8 @@ EMSCRIPTEN_BINDINGS(MidifilePerformer) {
 
   // CHRONOLOGY OPTIONS AND PARAMETERS /////////////////////////////////////////
 
+  register_vector<Events::SetPair<noteData>>("chronologyVector");
+
   typedef Events::correspondOption ShiftMode;
 
   enum_<ShiftMode>("shiftMode")
@@ -111,12 +113,13 @@ EMSCRIPTEN_BINDINGS(MidifilePerformer) {
     ;
 
   // CHRONOLOGY ////////////////////////////////////////////////////////////////
- 
+
   typedef Chronology<noteData, std::vector> Chronology;
 
   class_<Chronology>("Chronology")
     .constructor()
     .function("size",                 &Chronology::size)
+    .function("getContainer",         &Chronology::getContainer)
     .function("clear",                &Chronology::clear)
     .function("pushEvent",  optional_override(
       [](Chronology& self, double dt, const noteData& data) {
