@@ -20,8 +20,8 @@ dist:
 	mkdir dist/node; \
 	cp build/node/MidifilePerformer.* dist/node; \
 
-	cp -f README.md dist; \
-	cp -f LICENSE dist; \
+# cp -f README.md dist; \
+#	cp -f LICENSE dist; \
 
 # cp -f package.json dist; \
 # sed -i '' 's#"main": "dist/node/MidifilePerformer.js"#"main": "node/MidifilePerformer.js"#' dist/package.json; \
