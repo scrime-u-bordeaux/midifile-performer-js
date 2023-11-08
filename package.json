@@ -18,7 +18,8 @@
     "build": "make clean && make",
     "dist": "npm run build && make dist",
     "test": "node ./test/*.js | tap-spec",
-    "release": "npm run dist && np"
+    "release": "npm run dist && np",
+    "postversion": "node postversion.js"
   },
   "repository": {
     "type": "git",

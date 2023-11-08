@@ -23,11 +23,18 @@ dist:
 	cp -f README.md dist; \
 	cp -f LICENSE dist; \
 
-	cp -f package.json dist; \
-	sed -i '' 's#"main": "dist/node/MidifilePerformer.js"#"main": "node/MidifilePerformer.js"#' dist/package.json; \
-	sed -i '' 's#"browser": "dist/browser/MidifilePerformer.js"#"browser": "browser/MidifilePerformer.js"#' dist/package.json; \
+# cp -f package.json dist; \
+# sed -i '' 's#"main": "dist/node/MidifilePerformer.js"#"main": "node/MidifilePerformer.js"#' dist/package.json; \
+#	sed -i '' 's#"browser": "dist/browser/MidifilePerformer.js"#"browser": "browser/MidifilePerformer.js"#' dist/package.json; \
 
 	rm -rf build
+
+# check the following issue to avoid always being one version late in
+# dist/package.json (annoyingly, the one being published) :
+# https://github.com/sindresorhus/np/issues/516
+# see above : package.json was copied into dist before the version was bumped
+# see also the fix by will-stone at the end of the issue using the postversion
+# npm script lifecycle hook which is actually implemented
 
 clean:
 	if [ -d build ]; then rm -rf build; fi; \
