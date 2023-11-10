@@ -31,7 +31,8 @@
     "interpretation",
     "performance"
   ],
-  "author": "",
+  "author": { "name": "Joseph Larralde" },
+  "contributors": [{ "name": "Raphaël Blard" }],
   "license": "BSD-3-Clause",
   "bugs": {
     "url": "https://github.com/scrime-u-bordeaux/midifile-performer-js/issues"

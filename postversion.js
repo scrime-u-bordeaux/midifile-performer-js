@@ -1,12 +1,12 @@
 /*
-check the following issue to avoid always being one version late in
+Check the following issue to avoid always being one version late in
 dist/package.json (annoyingly, the one being published) :
 https://github.com/sindresorhus/np/issues/516
-problem : package.json was copied into dist (from make dist) before the version
+Problem : package.json was copied into dist (from make dist) before the version
 was bumped.
-here is an implementation of the fix suggested by will-stone at the end of the
-issue, based on the postversion npm script lifecycle hook.
-as specified by np's author, this workaround should be removed in the future and
+Here is an implementation of the fix suggested by will-stone at the end of the
+issue, triggered by the postversion npm script lifecycle hook.
+As specified by np's author, this workaround should be removed in the future and
 the (soon-to-be-supported ?) 'exports' field from package.json should be used
 instead to address this issue.
 */
